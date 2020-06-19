@@ -1,31 +1,32 @@
 import React from 'react';
 
-const Table = () => {
-    return (
-      
+class Table extends React.Component{
+  render(){
+     const{activities} = this.props
+     return(
       <table>
-        <thead>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Actividad</th>
+          <th>Horas</th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+          activities.map(function (activity){
+          return(
           <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Region</th>
-            <th>Memory</th>
-            <th>CPUs</th>
-            <th>Disk Size</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>  
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    );
+            <td>{activity.startDate}</td>
+            <td>{activity.summary}</td>
+            <td>{activity.actualHours}</td>
+          </tr> )
+          })
+        }
+      </tbody>
+    </table>
+     )
   }
+}
   
   export default Table
