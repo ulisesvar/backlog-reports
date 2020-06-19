@@ -14,15 +14,16 @@ class Table extends React.Component{
       </thead>
       <tbody>
       {
-          activities.map(function (activity){
+        activities.map(function (activity){
           return(
-          <tr>
-            <td>{activity.startDate}</td>
-            <td>{activity.summary}</td>
-            <td>{activity.actualHours}</td>
-          </tr> )
-          })
-        }
+            <tr>
+              <td>{activity.startDate}</td>
+              <td>{activity.summary}</td>
+              <td>{activity.actualHours}</td>
+            </tr> 
+          )
+        })
+      }
       </tbody>
     </table>
      )
