@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import GetActivities from './containers/GetActivities.js'
+import GetReporters from './containers/GetReporters.js'
 
 class App extends Component {
   render(){
     return(
-      <GetActivities />
+      <div>
+        <div>
+          <div class="container" id='reporters'>
+            <GetReporters />
+          </div>
+        </div>
+      </div>
     )
   }
 }
