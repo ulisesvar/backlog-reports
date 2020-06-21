@@ -36,29 +36,44 @@ class ReportersDropdown extends React.Component{
   render(){
      const{reporters} = this.props
      return(
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Elige el reporte a mostrar</label>
-                <select class="form-control" id="exampleFormControlSelect1" onChange={this.handleChange}>
-                    <option href="#" value=''>Selecciona un Empleado</option>
-                {
-                    reporters.map(function (reporter){
-                    return(
-                        <option id={reporter.name} href="#" value={reporter.id}>{reporter.name}</option>
-                    )
-                    })
-                }
-                </select>
+    <div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1" onChange={this.handleChange}>
+                        <option href="#" value=''>Elige un mes</option>
+                        <option href="#" value=''>Enero</option>
+                        <option href="#" value=''>Febrero</option>
+                        <option href="#" value=''>Marzo</option>
+                    </select>
+                </div>
             </div>
-            <div>
-              {
-                   <Table activities ={this.state.activities} />
-               }
-               
+            <div class="col">
+                <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1" onChange={this.handleChange}>
+                        <option href="#" value=''>Selecciona un Empleado</option>
+                    {
+                        reporters.map(function (reporter){
+                        return(
+                            <option id={reporter.name} href="#" value={reporter.id}>{reporter.name}</option>
+                        )
+                        })
+                    }
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <a href="#" class="btn btn-secondary active" role="button">Descarga Reporte</a>
             </div>
         </div>
-    </div> 
+        <div class="row">
+                <div class="col">
+                    {
+                        <Table activities ={this.state.activities} />
+                    }
+                </div>   
+        </div>
+    </div>     
 
      )
   }
