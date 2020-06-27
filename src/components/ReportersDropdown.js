@@ -34,7 +34,7 @@ class ReportersDropdown extends React.Component{
       }
 
   render(){
-     const{reporters} = this.props
+     const{reporters} = this.props;
      return(
     <div>
         <div class="row">

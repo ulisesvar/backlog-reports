@@ -1,10 +1,17 @@
 import React from 'react';
-import BuildReport from '../containers/BuildReport.js';
-import { act } from 'react-dom/test-utils';
+import { CSVLink } from "react-csv";
+
 class Table extends React.Component{
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      cvsString:''
+    };
+  }
  activitiesGrouped = [];
+ mystring='';
 
+ 
  dateIsIn(date) {
  for(var activity of this.activitiesGrouped)
     var isContained = false;
@@ -16,17 +23,16 @@ class Table extends React.Component{
 
 
 buidNewArray(activities){
-  
   for (var i = 0; i < activities.length; i++){
     var newActivities = [];
     newActivities.summary = activities[i].summary;
     newActivities.actualHours = parseFloat(activities[i].actualHours);
-    newActivities.startDate = activities[i].startDate;
+    newActivities.startDate =activities[i].startDate;
     if(this.activitiesGrouped.length === 0 || !this.dateIsIn(activities[i].startDate)){
       for (var j = i+1; j < activities.length; j++){       
         if (activities[j].startDate === activities[i].startDate) {
           var newActivities = [];
-          newActivities.summary = activities[i].summary + '\n' + activities[j].summary;       
+          newActivities.summary = '"' + activities[i].summary + '\n' + activities[j].summary +'"';       
           newActivities.actualHours = parseFloat(activities[i].actualHours)+ parseFloat(activities[j].actualHours);
           newActivities.startDate = activities[j].startDate;
         }
@@ -34,15 +40,20 @@ buidNewArray(activities){
       this.activitiesGrouped.push(newActivities);
     }
   }
+  for (var i = 0; i < this.activitiesGrouped.length; i++){
+   this.mystring += new Date(this.activitiesGrouped[i].startDate).toLocaleDateString('en-US', {timeZone: 'UTC'}) + ',' +
+              this.activitiesGrouped[i].summary + ','+
+              this.activitiesGrouped[i].actualHours + '\r\n'
+  }
 }
-
-
   render(){
      const{activities} = this.props
      if(activities.length > 0 ){
       this.buidNewArray(activities)
+      const download = this.mystring.toString();
       return(
-        <table class="table table-striped table-hover table-sm">
+        <div>
+        <table  id="activities" class="table table-striped table-hover table-sm">
         <thead class="thead-dark">
           <tr>
             <th>Fecha</th>
@@ -64,6 +75,8 @@ buidNewArray(activities){
         }
         </tbody>
       </table>
+      <CSVLink data={download}>Download Report</CSVLink>
+      </div>
       )
     } else { 
        return (<div></div>)
