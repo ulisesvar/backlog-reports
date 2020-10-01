@@ -27,21 +27,22 @@ buidNewArray(activities){
     var newActivities = [];
     newActivities.summary = activities[i].summary;
     newActivities.actualHours = parseFloat(activities[i].actualHours);
-    newActivities.startDate =activities[i].startDate;
+    newActivities.startDate = activities[i].startDate;
     if(this.activitiesGrouped.length === 0 || !this.dateIsIn(activities[i].startDate)){
       for (var j = i+1; j < activities.length; j++){       
         if (activities[j].startDate === activities[i].startDate) {
-          var newActivities = [];
-          newActivities.summary = '"' + activities[i].summary + '\n' + activities[j].summary +'"';       
-          newActivities.actualHours = parseFloat(activities[i].actualHours)+ parseFloat(activities[j].actualHours);
+          //var newActivities = [];
+          newActivities.summary += '\n' + activities[j].summary;       
+          newActivities.actualHours += parseFloat(activities[j].actualHours);
           newActivities.startDate = activities[j].startDate;
         }
       }
+      newActivities.summary = '"'+newActivities.summary+'"';
       this.activitiesGrouped.push(newActivities);
     }
   }
   for (var i = 0; i < this.activitiesGrouped.length; i++){
-   this.mystring += new Date(this.activitiesGrouped[i].startDate).toLocaleDateString('en-US', {timeZone: 'UTC'}) + ',' +
+   this.mystring += new Date(this.activitiesGrouped[i].startDate).toLocaleDateString('en-US', {timeZone: 'UTC'}) + ',' + "Desarrollo" + ',' +  ',' +
               this.activitiesGrouped[i].summary + ','+
               this.activitiesGrouped[i].actualHours + '\r\n'
   }
